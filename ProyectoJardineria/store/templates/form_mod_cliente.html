@@ -38,33 +38,42 @@
   
     </style>
     <script>
-        $(function() 
-    {
-      $("#formulario").validate({
-           rules: {
-                  email: {
-                        idProducto: "required",
-                        nombre: "required",
-                        precio: "required",
-                        
-                  }   
-                  
-              }, //rules
-          messages: {
-              idProducto: {
-                  required: 'Ingrese Id del producto ',
-              },
-              nombre: {
-                  required: 'Ingrese nombre del producto',
-              },
-              precio:{
-                  required: 'Ingrese precio del producto',
-              },
-              
-          }//messages
-      }); //$('#mi-formulario').validate
-  }); //function
-  </script>
+      $(function() 
+  {
+    $("#formulario").validate({
+         rules: {
+                email: {
+                      rut: "required",
+                      nombre: "required",
+                      direccion: "required",
+                      email: "required",
+                      telefono: "required",
+
+                      
+                }   
+                
+            }, //rules
+        messages: {
+            rut: {
+                required: 'Ingrese rut del cliente ',
+            },
+            nombre: {
+                required: 'Ingrese nombre del cliente',
+            },
+            direccion:{
+                required: 'Ingrese direccion del cliente',
+            },
+            email:{
+                required: 'Ingrese email del cliente',
+            },
+            telefono:{
+                required: 'Ingrese telefono del cliente',
+            },
+            
+        }//messages
+    }); //$('#mi-formulario').validate
+}); //function
+</script>
 </head>
 <body>
 
@@ -141,8 +150,8 @@
                     </div>
     
                     <div class="form-group">
-                        {{ form.apellido.label}}
-                        {{ form.apellido}}
+                        {{ form.direccion.label}}
+                        {{ form.direccion}}
                     </div>
 
                     <div class="form-group">

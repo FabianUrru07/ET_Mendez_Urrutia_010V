@@ -45,7 +45,7 @@
                   email: {
                         rut: "required",
                         nombre: "required",
-                        apellido: "required",
+                        direccion: "required",
                         email: "required",
                         telefono: "required",
 
@@ -60,8 +60,8 @@
               nombre: {
                   required: 'Ingrese nombre del cliente',
               },
-              apellido:{
-                  required: 'Ingrese apellido del cliente',
+              direccion:{
+                  required: 'Ingrese direccion del cliente',
               },
               email:{
                   required: 'Ingrese email del cliente',
@@ -150,8 +150,8 @@
                     </div>
     
                     <div class="form-group">
-                        {{ cliente_form.apellido.label}}
-                        {{ cliente_form.apellido}}
+                        {{ cliente_form.direccion.label}}
+                        {{ cliente_form.direccion}}
                     </div>
 
                     <div class="form-group">

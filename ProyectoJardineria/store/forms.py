@@ -63,11 +63,11 @@ class ClienteForm(forms.ModelForm):
 
     class Meta: 
         model= Cliente
-        fields = ['rut', 'nombre', 'apellido', 'email', 'telefono']
+        fields = ['rut', 'nombre', 'direccion', 'email', 'telefono']
         labels ={
             'rut': 'Rut', 
             'nombre': 'Nombre', 
-            'apellido': 'Apellido', 
+            'direccion': 'Direccion', 
             'email': 'Email',
             'telefono': 'Telefono'
             
@@ -87,11 +87,11 @@ class ClienteForm(forms.ModelForm):
                     'id': 'nombre'
                 }
             ), 
-            'apellido': forms.TextInput(
+            'direccion': forms.TextInput(
                 attrs={
                     'class': 'form-control', 
-                    'placeholder': 'Ingrese apellido', 
-                    'id': 'apellido'
+                    'placeholder': 'Ingrese direccion', 
+                    'id': 'direccion'
                 }
             ),
             'email': forms.TextInput(
