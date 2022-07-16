@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django.forms import widgets
 from django.forms.models import ModelChoiceField
 from django.forms.widgets import Widget
-from . models import  Producto, Cliente
+from . models import  Producto, Cliente, Pedido
 
 
 
@@ -16,13 +16,14 @@ class ProductoForm(forms.ModelForm):
         model= Producto
         imagen  = forms.ImageField()
         imagen.widget.attrs.update({'class': 'form-control','id':'id_imagen'})
-        fields = ['idProducto', 'nombre', 'precio','descripcion','imagen']
+        fields = ['idProducto', 'nombre', 'precio','descripcion','imagen','stock']
         labels ={
             'IdProducto': 'Id', 
             'nombre': 'Nombre', 
             'precio': 'Precio', 
             'descripcion': 'Descripcion',
-            'imagen' : 'Imagen'
+            'imagen' : 'Imagen',
+            'stock' : 'Stock'
             
         }
         widgets={
@@ -52,6 +53,13 @@ class ProductoForm(forms.ModelForm):
                     'class':'form-control',
                     'placeholder': 'Ingrese Descripcion',
                     'id':'descripcion'
+                }
+            ),
+            'stock': forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder': 'Ingrese Stock',
+                    'id':'stock'
                 }
             ),
             
@@ -109,5 +117,41 @@ class ClienteForm(forms.ModelForm):
                 }
             )  
             
+
+        }
+
+class PedidoForm(forms.ModelForm):
+
+    class Meta: 
+        model= Pedido
+        fields = ['idProducto', 'rut', 'estado']
+        labels ={
+            'idProducto': 'Id_Producto', 
+            'rut': 'Rut', 
+            'estado': 'Estado'            
+            
+        }
+        widgets={
+            'idProducto': forms.TextInput(
+                attrs={
+                    'class': 'form-control', 
+                    'placeholder': 'Ingrese Id Producto', 
+                    'id': 'idProducto'
+                }
+            ), 
+            'rut': forms.TextInput(
+                attrs={
+                    'class': 'form-control', 
+                    'placeholder': 'Ingrese rut', 
+                    'id': 'rut'
+                }
+            ),
+            'estado': forms.TextInput(
+                attrs={
+                    'class': 'form-control', 
+                    'placeholder': 'Estado Producto', 
+                    'id': 'estado'
+                }
+            )            
 
         }

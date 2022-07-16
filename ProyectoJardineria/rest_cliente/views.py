@@ -17,7 +17,7 @@ def lista_clientes(request):
     elif request.method== 'POST':
         data = JSONParser().parse(request)
         serializer = ClientesSerializer(data=data)
-        if serializer.is_valid:
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         else:

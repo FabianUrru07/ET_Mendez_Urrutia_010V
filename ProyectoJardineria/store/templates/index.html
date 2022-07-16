@@ -29,7 +29,7 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="{% url 'index' %}">Inicio</a>
+                        <a class="nav-link " href="{% url 'index' %}">Inicio</a>
                       </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'somos' %}">Somos</a>
@@ -47,20 +47,32 @@
                     <a class="nav-link " href="{% url 'api' %}">Feriados</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'form_crear_producto' %}">Producto</a>
+                    <a class="nav-link" href="{% url 'mostrarProducto' %}">Producto</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link " href="{% url 'form_crear_cliente' %}">Cliente</a>
+                    <a class="nav-link " href="{% url 'mostrarCliente' %}">Cliente</a>
                   </li>
-                  {% if user.is_authenticated %}
-                  <li class="nav-item">
-                    <a class="nav-link " href="{% url 'logout' %}">Logout</a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                  </li>
-                  {% endif %}
+                  {% if user.is_authenticated and True != user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'pedidos_realizados' user.id %}">Ver pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% endif %}
+              {% if user.is_authenticated and user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'ver_pedidos' %}">Ver pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% endif%}
+              {% if True != user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
                 </ul>
               </div>
             </div>
@@ -146,7 +158,7 @@
   </div>
   
 
-  <div class="footer-basic"  >
+  <div class="footer-basic " >
     <footer>
         <div class="social">
           <a href="https://www.instagram.com" style="background: url('https://api.iconify.design/ion/logo-instagram.svg') no-repeat center center / contain;"></a>
@@ -160,17 +172,17 @@
             <li class="list-inline-item" style="color: white;"><a href="{% url 'cont' %}">Contacto</a></li>
             <li class="list-inline-item" style="color: white;"><a href="{% url 'ver' %}">Registrate</a></li>
             <li class="list-inline-item" style="color: white;"><a href="{% url 'api' %}">Feriados</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'form_crear_producto' %}">Productos</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'form_crear_cliente' %}">Cliente</a></li>
+            <li class="list-inline-item" style="color: white;"><a href="{% url 'mostrarProducto' %}">Productos</a></li>
+            <li class="list-inline-item" style="color: white;"><a href="{% url 'mostrarCliente' %}">Cliente</a></li>
             {% if user.is_authenticated %}
-                <li class="list-inline-item" style="color: white;">
-                  <a href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="list-inline-item" style="color: white;">
-                  <a href="{% url 'login' %}">Login</a>
-                </li>
-                {% endif %}
+            <li class="list-inline-item" style="color: white;">
+              <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="list-inline-item" style="color: white;">
+              <a href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
         </ul>
         <p class="copyright">Fabian Urrutia , Michael Mendez © 2022</p>
     </footer>

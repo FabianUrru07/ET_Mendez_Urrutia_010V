@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import  salir,form_crear_producto, index, ver, cont, gale, somos, api, form_crear_producto,form_mod_producto,form_del_producto,mostrarProducto,form_crear_cliente,form_mod_cliente,form_del_cliente,mostrarCliente
+from .views import  Detalle, pedidos_realizados, salir,form_crear_producto, index, test, ver, cont, gale, somos, api, form_crear_producto,form_mod_producto,form_del_producto,mostrarProducto,form_crear_cliente,form_mod_cliente,form_del_cliente,mostrarCliente, ver_pedidos
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -20,7 +20,11 @@ urlpatterns = [
     path ('form_del_cliente/<id>', form_del_cliente, name="form_del_cliente"),
     path ('mostrarCliente', mostrarCliente, name="mostrarCliente"),
     path ('accounts/login', include('django.contrib.auth.urls'),name="login"),
-    path ('salir/',salir, name="logout")
+    path ('salir/',salir, name="logout"),
+    path ('detalle/<id>',Detalle,name="detalle"),
+    path ('test/', test,name="test"),
+    path ('pedidos_realizados/<id>',pedidos_realizados,name="pedidos_realizados"),
+    path ('ver_pedidos/', ver_pedidos, name="ver_pedidos")
 ]
 
 if settings.DEBUG:

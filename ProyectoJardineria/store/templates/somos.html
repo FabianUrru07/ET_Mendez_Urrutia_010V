@@ -31,7 +31,7 @@
                         <a class="nav-link " href="{% url 'index' %}">Inicio</a>
                       </li>
                   <li class="nav-item">
-                    <a class="nav-link disabled" href="{% url 'somos' %}">Somos</a>
+                    <a class="nav-link" href="{% url 'somos' %}">Somos</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'gale' %}">Galeria</a>
@@ -46,20 +46,32 @@
                     <a class="nav-link " href="{% url 'api' %}">Feriados</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'form_crear_producto' %}">Producto</a>
+                    <a class="nav-link" href="{% url 'mostrarProducto' %}">Producto</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link " href="{% url 'form_crear_cliente' %}">Cliente</a>
+                    <a class="nav-link " href="{% url 'mostrarCliente' %}">Cliente</a>
                   </li>
-                  {% if user.is_authenticated %}
-                  <li class="nav-item">
-                    <a class="nav-link " href="{% url 'logout' %}">Logout</a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                  </li>
-                  {% endif %}
+                  {% if user.is_authenticated and True != user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'pedidos_realizados' user.id %}">Ver pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% endif %}
+              {% if user.is_authenticated and user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'ver_pedidos' %}">Ver pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% endif%}
+              {% if True != user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
                 </ul>
               </div>
             </div>
@@ -102,35 +114,35 @@
     
   
 
-  <div class="footer-basic" style="margin-top:2%; background-color: green; " >
-    <footer>
-        <div class="social">
-          <a href="https://www.instagram.com" style="background: url('https://api.iconify.design/ion/logo-instagram.svg') no-repeat center center / contain;"></a>
-          <a href="https://www.twitter.com" style="content: url('https://api.iconify.design/bi/twitter.svg');" ></a>
-          <a href="https://www.facebook.com" style="content: url('https://api.iconify.design/bi/facebook.svg');"></a>
-        </div>
-        <ul class="list-inline">
-            <li class="list-inline-item" style="color: white;" ><a href="{% url 'index' %}">Inicio</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'somos' %}">Somos</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'gale' %}">Galeria</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'cont' %}">Contacto</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'ver' %}">Registrate</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'api' %}">Feriados</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'form_crear_producto' %}">Productos</a></li>
-            <li class="list-inline-item" style="color: white;"><a href="{% url 'form_crear_cliente' %}">Cliente</a></li>
-            {% if user.is_authenticated %}
-                <li class="list-inline-item" style="color: white;">
-                  <a href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="list-inline-item" style="color: white;">
-                  <a href="{% url 'login' %}">Login</a>
-                </li>
-                {% endif %}
-        </ul>
-        <p class="copyright">Fabian Urrutia , Michael Mendez © 2022</p>
-    </footer>
-  </div>
+    <div class="footer-basic " >
+      <footer>
+          <div class="social">
+            <a href="https://www.instagram.com" style="background: url('https://api.iconify.design/ion/logo-instagram.svg') no-repeat center center / contain;"></a>
+            <a href="https://www.twitter.com" style="content: url('https://api.iconify.design/bi/twitter.svg');" ></a>
+            <a href="https://www.facebook.com" style="content: url('https://api.iconify.design/bi/facebook.svg');"></a>
+          </div>
+          <ul class="list-inline">
+              <li class="list-inline-item" style="color: white;" ><a href="{% url 'index' %}">Inicio</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'somos' %}">Somos</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'gale' %}">Galeria</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'cont' %}">Contacto</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'ver' %}">Registrate</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'api' %}">Feriados</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'mostrarProducto' %}">Productos</a></li>
+              <li class="list-inline-item" style="color: white;"><a href="{% url 'mostrarCliente' %}">Cliente</a></li>
+              {% if user.is_authenticated %}
+              <li class="list-inline-item" style="color: white;">
+                <a href="{% url 'logout' %}">Logout</a>
+              </li>
+              {% else %}
+              <li class="list-inline-item" style="color: white;">
+                <a href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
+          </ul>
+          <p class="copyright">Fabian Urrutia , Michael Mendez © 2022</p>
+      </footer>
+    </div>
 
 
 

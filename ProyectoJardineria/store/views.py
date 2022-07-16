@@ -1,14 +1,16 @@
 from django.shortcuts import redirect, render
-from .models import Producto, Cliente
-from .forms import ProductoForm, ClienteForm
+from .models import Producto, Cliente, Pedido
+from .forms import ProductoForm, ClienteForm, PedidoForm
 from django.contrib.auth import logout
 
 # Create your views here.
 
+def test (request):
+    return render(request, 'test.html')
+
 def index(request):
 
     return render(request, 'index.html')
-
 
 def ver(request):
     return render (request, 'registro.html')
@@ -17,13 +19,44 @@ def cont(request):
     return render (request, 'contacto.html')
 
 def gale(request):
-    return render (request, 'galeria.html')
+    producto = Producto.objects.all()
+    datos = {
+        'producto' : producto
+    }
+
+    return render (request, 'galeria.html',datos)
+
+def ver_pedidos(request):
+    pedido = Pedido.objects.all()
+    datos = {
+        'pedido' : pedido
+    }
+
+    return render (request, 'ver_pedidos.html',datos)
+
+def pedidos_realizados(request,id):
+    pedido = Pedido.objects.get(rut = id)
+    producto = Producto.objects.get(idProducto = pedido.idProducto)
+    datos = {
+        'producto': producto,
+        'pedido': pedido
+    }
+
+    return render(request,'pedidos_realizados.html',datos)
+    
 
 def somos(request):
     return render (request, 'somos.html')
 
 def api(request):
     return render (request, 'Api.html')
+
+def Detalle(request, id):
+    producto = Producto.objects.get(idProducto = id)
+    datos = {
+        'producto': producto
+    }
+    return render(request,'Detalle_producto.html',datos)
     
 def form_crear_producto(request):
     
@@ -62,6 +95,7 @@ def mostrarProducto(request):
     datos = {
         'producto' : producto
     }
+
     return render(request, 'mostrarProducto.html', datos)
 
 def form_crear_cliente(request):
@@ -100,8 +134,17 @@ def mostrarCliente(request):
     }
     return render(request, 'mostrarCliente.html', datos)
 
-
-
 def salir(request):
     logout(request)
     return render(request,'index.html')
+
+def crear_pedido(request):
+    
+    if request.method=='POST':
+        pedido_form = PedidoForm(request.POST)
+        if pedido_form.is_valid():
+            pedido_form.save()     
+            return redirect('mostrarPedido')   #similar al insert
+    else:
+        pedido_form=PedidoForm()
+    return render(request, 'form_crear_producto.html', {'pedido_form': pedido_form})
